@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: linear-gradient(to right, #004aff, #c753b7);
+            height: 100vh;
+
+        }
+
+        input {
+            font-size: larger;
+        }
+
+        button {
+            font-size: xx-large;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .formContainer {
+            position: absolute;
+            top: 30%;
+            left: 35%;
+            border: 3px solid black;
+            box-shadow: 5px 10px #5670a48a;
+            padding: 27px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <p id="demo"></p>
+
+    <div class="formContainer">
+        <form>
+            <div>
+                <label for="loginid" style="font-size:50px;">Login id:</label><br>
+                <i class="glyphicon glyphicon-envelope"></i>
+                <input type="text" id="loginid" name="fname" placeholder="Email" name="email"
+                    style="height: 50px; width: 400px;">
+
+            </div>
+            <div>
+                <label for="lname" style="font-size:50px;">Password:</label><br>
+                <i class="glyphicon glyphicon-lock"></i>
+                <input type="password" id="pass" name="pass" placeholder="Password" name="psw"
+                    style="height: 50px; width: 400px;">
+
+            </div>
+
+            <div style="margin-top:2%; text-align:center;">
+                <button onclick="mprint()" class="button" type="button"
+                    style="height: 50px; width: 200px;">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+    <script>
+
+        function mprint() {
+
+            var input = document.getElementById('loginid').value;
+            var pa = document.getElementById('pass').value;
+            console.log(input);
+            console.log(pa);
+          var data=[input,pa];
+            fetch('http://localhost:3000/auth/signIn', {method: 'POST', body: JSON.stringify(data)})
+            fetch('http://localhost:3000/auth/signIn', {method: 'POST', body: JSON.stringify(data)}).then(val => val.json()).then(val => console.log(val)).catch(err => console.log(err));
+
+
+        }
+    </script>
+
+</body>
+
+</html>
