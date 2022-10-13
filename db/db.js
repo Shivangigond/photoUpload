@@ -15,8 +15,15 @@ db.serialize(() => {
         email varchar(255),
         password varchar(255),
         name varchar(255)
-    );`;
+    );
+    `;
+    const imageTable = `Create Table IF NOT EXISTS Image (
+        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+        LoginId varchar(255),                         
+        ImageUrl varchar(255)                   
+        );`
     db.run(userTable)
+    db.run(imageTable)
     // db.run("CREATE TABLE lorem (info TEXT)");
 
     // const stmt = db.prepare("INSERT INTO lorem VALUES (?)");
@@ -28,6 +35,6 @@ db.serialize(() => {
     // db.each("SELECT rowid AS id, info FROM lorem", (err, row) => {
     //     console.log(row.id + ": " + row.info);
     // });
-})
+});
 
 module.exports = db;

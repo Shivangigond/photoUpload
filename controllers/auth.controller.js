@@ -17,8 +17,6 @@ function Signup(req, res, next) {
         }
     });
 };
-
-
 function SignIn(req, res, next) {
     let body = req.body;
     var loginid = body.loginid;
@@ -32,8 +30,6 @@ function SignIn(req, res, next) {
         }
     })
 };
-
-
 
 exports.Signup = Signup;
 exports.SignIn = SignIn;

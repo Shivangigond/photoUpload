@@ -1,10 +1,12 @@
 const express = require('express');
 const routers = express.Router();
 const AuthController = require('../controllers/auth.controller');
+const AuthMiddleWare = require('../middleware/auth.middleware')
 const path = require('path');
 let ejs = require('ejs');
 const db = require('../db/db');
 const upload = require('../multerUpload');
+const { homedir } = require('os');
 let errmessage = null;
 let isSingInSuccess = false;
 routers.get('/signIn', (req, res, next) => {
@@ -25,10 +27,15 @@ routers.post('/dosignIn', (req, res, next) => {
         if (rowData == undefined) {
             errmessage = "Not authorized";
             res.redirect('/auth/signIn');
-            
+
         } else {
-            isSingInSuccess = true;
+
+            req.session['isLogin'] = true;
+            req.session['UserId'] = rowData.ID;
+            req.session['name'] = rowData.name;
             res.redirect('/auth/home');
+
+
         }
     })
     console.log('here')
@@ -42,73 +49,69 @@ routers.get('/signUp', (req, res, next) => {
     })
 });
 routers.post('/dosignUp', (req, res, next) => {
-    const email = req.body.email;
+    const email = req.body.email; 
     const password = req.body.password;
-    const name=req.body.name;
-    const query = "Select * from User where email=?";
-    db.get(query, [email], function (err, rowData) {
+    const name = req.body.name;
+    const query = "Select * from User where email=?";//query to get data where email is gouravgond07@gmail.com
+    db.get(query, [email], function (err, rowData) {//check err and undefined
         if (rowData === undefined) {
-            const stmt = db.prepare("INSERT INTO User(email, password, name) VALUES (?,?,?)");
+            const stmt = db.prepare("INSERT INTO User(email, password, name) VALUES (?,?,?)");//Insert data
             stmt.run([email, password, name])
             res.redirect('/auth/signIn');
         } else {
-            res.redirect('/auth/signUp')
+            res.redirect('/auth/signUp')//if error then again sign up
         }
     })
 });
 
-routers.get('/home', (req, res, next) => {
-    if (isSingInSuccess) {
-        const filePath = path.resolve(path.join(__dirname, '..', 'views', 'html2', 'home.ejs'));
-        ejs.renderFile(filePath, {}).then(fileContent => {
-            res.send(fileContent);
-            res.end();
-        })
-    } else {
-        res.redirect('/auth/SignIn')
-    }
+routers.get('/home', AuthMiddleWare.authMiddleWare, (req, res, next) => {
+    console.log('home', req.session)
+    const UserId = req.session['UserId']
+ const data=[];
+    db.all("SELECT * FROM Image where LoginId="+(UserId), function(err, rows) {
+        rows.forEach(function (row) {
+            data.push(row.ImageUrl)
+          console.log(row.ImageUrl);
+          console.log("data",data);
+          console.log(data.length)
+        });
+   console.log(data.length);
+    const filePath = path.resolve(path.join(__dirname, '..', 'views', 'html2', 'home.ejs'));
+    ejs.renderFile(filePath, {data: data}).then(fileContent => {
+        res.send(fileContent);
+        const UserId = req.session['UserId']
+       // const query = `Select * from Image where LoginId=${UserId}`
+        console.log('hi');
+       res.end();
+        console.log(UserId)
+        
+       });
+       
+    })
 
+     
+      
 });
 
-routers.post('/doFileUpload', upload, (req,res,next) => {
+
+routers.post('/doFileUpload', upload, (req, res, next) => {
     console.log(req);
     console.log(req.body.file);
     console.log(req.file)
-    res.send('hello')
+    const fileURL = `http://localhost:3000/upload-pic/${req.file.filename}`;
+    const userId = req.session['UserId']
+    console.log(fileURL);
+    console.log(userId)
+    const loginid = userId;
+    const ImageUrl = fileURL;
+    const stmt = db.prepare("INSERT INTO Image(LoginId, ImageUrl) VALUES (?,?)");
+    stmt.run([loginid, ImageUrl]);
+    res.redirect('/auth/home');
+ 
+});
+
+routers.get('/temp', AuthMiddleWare.authMiddleWare, (req, res) => {
+    res.send('hii working')
 })
-// routers.post('/signup', AuthController.Signup);
-
-// routers.post('/signIn', AuthController.SignIn);
-
-// routers.get('/signInPage', (req, res, next) => {
-//     const loginPath = path.resolve(path.join(__dirname, '..', 'views', 'html', 'login.html'));
-//     res.sendFile(loginPath)
-
-//     // res.json({msg: 'hello'})
-// })
-// routers.get('/signup', (req, res, next) => {
-//     const signPath = path.resolve(path.join(__dirname, '..', 'views', 'html', 'sign.html'), "gourav");
-//     res.sendFile(signPath)
-
-//     // res.json({msg: 'hello'})
-// })
-// routers.get('/upload', (req, res, next) => {
-//     const image = [];
-//     const uploadPath = path.resolve(path.join(__dirname, '..', 'views', 'html', 'upload.html'), images
-//     );
-//     res.sendFile(uploadPath)
-
-//     // res.json({msg: 'hello'})
-// })
-
-// routers.get('/temp', (req, res, next) => {
-//     const filePath = path.resolve(path.join(__dirname, '..', 'views', 'html', 'temp.ejs'));
-//     const photosData = [{name: 'xyz', imageUrl: 'htp//', descript: 'ddkdk'}]
-//     console.log(ejs.compile())
-//     ejs.renderFile(filePath,{name: "souravh", data: ["gourav", "sourabh", 'xyz', 'shdkdk'], photos: photosData}).then(val => {
-//         res.end(val)
-//     })
-// })
-
 
 module.exports = routers;

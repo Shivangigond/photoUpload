@@ -1,10 +1,21 @@
 <head>
-    <body>
 
-        <h1>Home</h1>
-        <form action="/auth/doFileUpload" method="post" enctype="multipart/form-data">
-            <input type="file" name="mypic" id="">
-            <button class="btn btn-success" type="submit">Submit</button>
-        </form>
-    </body>
+<body>
+
+    <h1>Home</h1>
+    <form action="/auth/doFileUpload" method="post" enctype="multipart/form-data">
+        <input type="file" name="mypic" id="pic">
+        <button class="btn btn-success" type="submit">Submit</button>
+
+    </form>
+    <% for(let count = 0; count < data.length ; count++ ){ %>
+                <img src='<%= data[count] %>' height="300" width="450"/>
+        <%#  will output the numbers 1-100 %>
+    <% } %>
+    
+    <script>
+
+
+    </script>
+</body>
 </head>
