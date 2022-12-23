@@ -28,7 +28,9 @@ routers.post('/dosignIn', (req, res, next) => {
             errmessage = "Not authorized";
             res.redirect('/auth/signIn');
 
-        } else {
+        } 
+    
+        else {
 
             req.session['isLogin'] = true;
             req.session['UserId'] = rowData.ID;
@@ -89,7 +91,8 @@ routers.get('/home', AuthMiddleWare.authMiddleWare, (req, res, next) => {
        
     })
 
-     
+
+
       
 });
 
@@ -110,6 +113,20 @@ routers.post('/doFileUpload', upload, (req, res, next) => {
  
 });
 
+routers.get('/uploadpage', (req, res, next) => {
+    const filePath = path.resolve(path.join(__dirname, '..', 'views', 'html2', 'uploadpage.ejs'));
+    ejs.renderFile(filePath).then(fileContent => {
+        res.send(fileContent);
+        res.end();
+    })
+});
+routers.get('/upload', (req, res, next) => {
+    const filePath = path.resolve(path.join(__dirname, '..', 'views', 'html2', 'upload.ejs'));
+    ejs.renderFile(filePath).then(fileContent => {
+        res.send(fileContent);
+        res.end();
+    })
+});
 routers.get('/temp', AuthMiddleWare.authMiddleWare, (req, res) => {
     res.send('hii working')
 })

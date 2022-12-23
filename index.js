@@ -11,6 +11,7 @@ var session = require('express-session');
 app.use(cookieParser());
 app.use(session({secret: "Shh, its a secret!"}));
 app.use('/upload-pic/', express.static(__dirname + '/uploads'));
+app.use('/assets/', express.static(__dirname + '/assets'));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))

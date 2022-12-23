@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="../assets/css/grid-gallery.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .header {
+          text-align: center;
+          padding: 32px;
+        }
+        
+        .row {
+          display: -ms-flexbox; /* IE 10 */
+          display: flex;
+          -ms-flex-wrap: wrap; /* IE 10 */
+          flex-wrap: wrap;
+          padding: 0 4px;
+        }
+        
+        /* Create two equal columns that sits next to each other */
+        .column {
+          -ms-flex: 50%; /* IE 10 */
+          flex: 50%;
+          padding: 0 4px;
+        }
+        
+        .column img {
+          margin-top: 8px;
+          vertical-align: middle;
+        }
+        h1{
+          color: blueviolet;
+        }
+        /* Style the buttons */
+        </style>
+        
+</head>
+<body>
+  <%- include('header') %>
+
+    <h1 style="text-align: center;">YOU CAN SHARE YOUR BEAUTIFUL MEMORIES</h>
+
+      <div class="gg-container">
+        <div class="gg-box" id="heightWidth">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMjSKsKeS3-sTZe8Hy5NCEN9tpqcy6V_bsaQ&usqp=CAU"  >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyybGLJroA9CGkd93AHXpGuhmGD8X4-ylLBg&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkuP4A26vUkEZwYJL4zGV8KRxUbBmcX11Mdw&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKJwhBpP9dO9A_yH_FVIKC-wCDh5v4r-OXWQ&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMQitFAPVIUHJMw_S0a_Mp5deCSCrH9mEPEw&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL8ly8Mz04qngKQoHlxbzQTv9Gkin7cqSVZw&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHTuG8U4v95lRiiYH-Azbs2Gd5LH-aNKpy6SulenOiOEdeYdfMQx0EnigjZ3KRt7s-KSU&usqp=CAU" >
+<img src="https://wallpaperaccess.com/full/4320849.jpg" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL65zHrpnmuvd-cMjgAUxbHwCbUfjI7IaExA&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6X9a4Vjg28CWrCorQMHZQfpvmoBZ6NT7uoQ&usqp=CAU"  >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6AWy8QBbopf9pfzUGeFRdC6cJiwPGR8ihYQ&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXGcGbNxaJWGVJfAMU6EW2Sk3FDGjPbwEhSA&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThiTkrDJOzoCzqQ8Rx8N2AcSvh83lO1zSdAA&usqp=CAU" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3OxWvBCwqxei2EHWhyLge8T0v16Toyp1T6g&usqp=CAU" >
+        </div>
+        </div>
+
+        <script src="../assets/js/grid-gallery.min.js"></script>
+        <script>
+          gridGallery({
+      selector: "#heightWidth",
+      gaplength: 10,
+      rowHeight: 180,
+      columnWidth: 280
+    });
+        </script>
+        
+</body>
+</html>

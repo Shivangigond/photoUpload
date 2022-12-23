@@ -1,21 +1,81 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="../assets/css/grid-gallery.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0079ff3d;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #111;
+    }
+  </style>
+</head>
+
+
 
 <body>
 
-    <h1>Home</h1>
-    <form action="/auth/doFileUpload" method="post" enctype="multipart/form-data">
-        <input type="file" name="mypic" id="pic">
-        <button class="btn btn-success" type="submit">Submit</button>
+  
+  <ul>
+    <li><a class="active" href="http://localhost:3000/auth/uploadpage"><i class="fa fa-fw fa-home"></i> Home</a></li>
 
-    </form>
-    <% for(let count = 0; count < data.length ; count++ ){ %>
-                <img src='<%= data[count] %>' height="300" width="450"/>
-        <%#  will output the numbers 1-100 %>
-    <% } %>
-    
-    <script>
+    <li style="float:right"><a class="active" href="http://localhost:3000/auth/uploadpage"><i class="fa fa-sign-in"></i>
+        Logout </a></li>
+    <li style="float:right"><a class="active" href="http://localhost:3000/auth/upload"><i class="fa fa-sign-in"></i>
+        Upload </a></li>
 
+  </ul>
 
-    </script>
+  <h1> </h1>
+
+  <h1> </h1>
+  <!-- <% for(let count=0; count < data.length ; count++ ){ %>
+    <img src='<%= data[count] %>' height="300" width="450" />
+    <%# will output the numbers 1-100 %>
+      <% } %> -->
+      <div class="gg-container">
+        <div class="gg-box" id="heightWidth">
+          <% for(let count=0; count < data.length ; count++ ){ %>
+    <img src='<%= data[count] %>' />
+    <%# will output the numbers 1-100 %>
+      <% } %>
+         
+        </div>
+        </div>
+        <script src="../assets/js/grid-gallery.min.js"></script>
+        <script>
+          gridGallery({
+      selector: "#heightWidth",
+      gaplength: 10,
+      rowHeight: 180,
+      columnWidth: 280
+    });
+        </script>
 </body>
 </head>

@@ -5,11 +5,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/grid-gallery.min.css">
     <%- include('impCdn') %>
 </head>
 
 <body>
-    <%- include('header') %>
+    <style>
+         body {
+            height:800px;
+  background-color: rgb(142, 27, 184); /* For browsers that do not support gradients */
+  background-image: linear-gradient(rgba(51, 0, 255, 0.401), rgb(0, 204, 255));
+}
+
+    .container{
+        top: 50%;
+        left: 50%;
+        width: 30em;
+        height: 18em;
+        margin-top: -15em;
+        margin-left: -15em;
+        border: 1px solid #666;
+        background-color: white;
+        position: fixed;
+
+  
+
+    }
+    </style>
+   <%- include('header') %>
         <div class="container">
             <div class="row">
                 <div class="col-10 m-auto">
@@ -18,16 +41,13 @@
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1"
                                 aria-describedby="emailHelp" name="email">
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            <div id="emailHelp" class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                         </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
+                       
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <% if (errmessage) { %>
                             <h2 style="color: red;">

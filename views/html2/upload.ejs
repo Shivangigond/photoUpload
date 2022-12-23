@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    .container{
+        height: 800px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(rgb(132, 0, 255), rgb(21, 137, 160));
+    }
+    form{
+        top: 50%;
+        left: 50%;
+        width: 20em;
+        height: 10em;
+        margin-top: -15em;
+        margin-left: -15em;
+        position: fixed;
+        font-size: 60px;
+
+    }
+    </style>
+    <title>Document</title>
+    <div class="container">
+    <form action="/auth/doFileUpload" method="post" enctype="multipart/form-data">
+        <input type="file" name="mypic" id="pic">
+        <button class="btn btn-success" type="submit" >Submit</button>
+
+    </form>
+    </div>
+
+</head>
+<body>
+    
+</body>
+</html>
